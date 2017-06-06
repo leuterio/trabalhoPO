@@ -1,93 +1,73 @@
 
 public class Sort {
-
-	public static void quicksort (Item[] _lista) {
-		ordena (0, _lista.length-1, _lista);
+	public static void quicksort (Item[] list) {
+		quicksort(0, list.length-1, list);
 	}
 	
-	private static void ordena (int esq, int dir, Item[] _lista) {
-		int i = esq, j = dir;
-		long pivo;
-		Item temp;
-		pivo = _lista[(i+j)/2].getCpfLong();
+	private static void quicksort(int left, int right, Item[] list) {
+		int i = left, j = right;
+		long pivot;
+		pivot = list[(i+j)/2].getCpfLong();
 		
 		while (i <= j){
-			while (_lista[i].getCpfLong() < pivo)
-				i++;
-			
-			while (_lista[j].getCpfLong() > pivo)
-				j--;
-			
+			while (list[i].getCpfLong() < pivot) i++;
+			while (list[j].getCpfLong() > pivot) j--;
 			if (i <= j) {
-				temp = _lista[i];
-				_lista[i] = _lista[j];
-				_lista[j] = temp;
+                Item tmp;
+				tmp = list[i];
+				list[i] = list[j];
+				list[j] = tmp;
 				i++;
 				j--;
 			}
-		} 
+		}
 		
-		if (esq < j){
-			ordena (esq, j, _lista);
-		}
-		if (dir > i){
-			ordena (i, dir, _lista);
-		}
+		if (left < j) quicksort(left, j, list);
+		if (right > i) quicksort(i, right, list);
 	}
 	
-	public static void quickInsert (Item[] _lista) {
-		quickInsert (_lista, 0, _lista.length-1);
+	public static void quickInsert (Item[] list) {
+		quickInsert (list, 0, list.length-1);
 	}
 	
-	private static void quickInsert (Item[] _lista, int esq, int dir) {
-		int i = esq, j = dir;
+	private static void quickInsert (Item[] list, int left, int right) {
+		int i = left, j = right;
         Item tmp;
-        Long pivot = _lista[(i+j)/2].getCpfLong();
+        Long pivot = list[(i+j)/2].getCpfLong();
 
         while (i <= j) {
-            while (_lista[i].getCpfLong() < pivot) {
-                i++;
-            }
-
-            while (_lista[j].getCpfLong() > pivot) {
-                j--;
-            }
+            while (list[i].getCpfLong() < pivot) i++;
+            while (list[j].getCpfLong() > pivot) j--;
             if (i <= j) {
-                tmp = _lista[i];
-                _lista[i] = _lista[j];
-                _lista[j] = tmp;
+                tmp = list[i];
+                list[i] = list[j];
+                list[j] = tmp;
                 i++;
                 j--;
             }
         }
 
-        if (esq < j) {
-            if ((j - esq) > 25) {
-                quickInsert(_lista, esq, j);
-            } else {
-                insertionSort(_lista, esq, j);
-            }
+        if (left < j) {
+            if (j - left > 25) quickInsert(list, left, j);
+            else insertionSort(list, left, j);
         }
-        if (dir > i) {
-            if ((dir - i) > 25) {
-                quickInsert(_lista, i, dir);
-            } else {
-                insertionSort(_lista, i, dir);
-            }
+        if (right > i) {
+            if (right - i > 25) quickInsert(list, i, right);
+            else insertionSort(list, i, right);
         }
 	}
 	
-	private static void insertionSort(Item[] _lista, int esq, int dir) {
+	private static void insertionSort(Item[] list, int left, int right) {
         int i, j;
         Item tmp;
-        for (i = esq + 1; i <= dir; i++) {
-            tmp = _lista[i];
+        for (i = left + 1; i <= right; i++) {
+            tmp = list[i];
             j = i;
-            while (j > 0 && _lista[j - 1].getCpfLong() > tmp.getCpfLong()) {
-                _lista[j] = _lista[j - 1];
+            while (j > 0 && list[j - 1].getCpfLong() > tmp.getCpfLong()) {
+                list[j] = list[j - 1];
                 j--;
             }
-            _lista[j] = tmp;
+            list[j] = tmp;
         }
     }
 }

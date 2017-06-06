@@ -1,39 +1,35 @@
 public class Item {
-	private String name;
-	private String cpf;
-	private String city;
+	private string name;
+	private string cpf;
+	private string city;
 	
-	public Item() {
-		// TODO Auto-generated constructor stub
-	}
-	
-	public Item(String name, String cpf, String city) {
+	public Item(string name, string cpf, string city) {
 		this.cpf = cpf;
 		this.name = name;
 		this.city = city;
 	}
 
-	public String getName() {
+	public string getName() {
 		return name;
 	}
 	
-	public void setName(String name) {
+	public void setName(string name) {
 		this.name = name;
 	}
 	
-	public String getCpf() {
+	public string getCpf() {
 		return cpf;
 	}
 	
-	public void setCpf(String cpf) {
+	public void setCpf(string cpf) {
 		this.cpf = cpf;
 	}
 	
-	public String getCity() {
+	public string getCity() {
 		return city;
 	}
 	
-	public void setCity(String city) {
+	public void setCity(string city) {
 		this.city = city;
 	}
 }
