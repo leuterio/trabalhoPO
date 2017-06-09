@@ -17,7 +17,7 @@ public class Hashing {
 
     }
 
-    public String[] search(string[] cpfs){
+    public String[] search(String[] cpfs){
         String[] line = new String[cpfs.length];
         for (int i = 0; i < cpfs.length; i++) {
             line[i] = this.search(Long.parseLong(cpfs[i]));

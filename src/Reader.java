@@ -13,11 +13,10 @@ public class Reader {
 	
 	public static void read(Item[] dataVector, String file) {
 		try {
-			BufferedReader in = new BufferedReader(new FileReader(new File(INPUT + file + ".txt")));
+			BufferedReader in = new BufferedReader(new FileReader(new File(INPUT + file)));
 			String line = "";
 			String values[];
 			int i = 0;
-			
 			while ((line = in.readLine()) != null) {
 				values = line.split(";");
 				dataVector[i] = new Item(values[0], values[1], values[2]);
@@ -33,7 +32,7 @@ public class Reader {
 	
 	public static void read(ABB tree, String file) {
 		try {
-			BufferedReader in = new BufferedReader(new FileReader(new File(INPUT + file + ".txt")));
+			BufferedReader in = new BufferedReader(new FileReader(new File(OUTPUT + file)));
 			String line = "";
 			String values[];
 
@@ -49,7 +48,7 @@ public class Reader {
 	
 	public static void read(AVL tree, String file) {
 		try {
-			BufferedReader in = new BufferedReader(new FileReader(new File(INPUT + file + ".txt")));
+			BufferedReader in = new BufferedReader(new FileReader(new File(OUTPUT + file)));
 			String line = "";
 			String values[];
 			
@@ -67,7 +66,7 @@ public class Reader {
 	
 	public static void read(Hashing hash, String file) {
 		try {
-			BufferedReader in = new BufferedReader(new FileReader(new File(INPUT + file + ".txt")));
+			BufferedReader in = new BufferedReader(new FileReader(new File(OUTPUT + file)));
 			String line = "";
 			String values[];
 			
@@ -104,7 +103,7 @@ public class Reader {
 	
 	public static void save(Item[] data, String file) {
 		try {
-			BufferedWriter out = new BufferedWriter(new FileWriter(new File(OUTPUT + file + ".txt")));
+			BufferedWriter out = new BufferedWriter(new FileWriter(new File(OUTPUT + file)));
 			for (int i = 0; i < data.length && data[i] != null; i++) {
 				out.write(data[i].getName() + ";" 
 						+ data[i].getCpf() + ";" 

@@ -7,11 +7,11 @@ public class Sort {
 	private static void quicksort(int left, int right, Item[] list) {
 		int i = left, j = right;
 		long pivot;
-		pivot = list[(i+j)/2].getCpfLong();
+		pivot = list[(i+j) >> 1].getCpf();
 		
 		while (i <= j){
-			while (list[i].getCpfLong() < pivot) i++;
-			while (list[j].getCpfLong() > pivot) j--;
+			while (list[i].getCpf() < pivot) i++;
+			while (list[j].getCpf() > pivot) j--;
 			if (i <= j) {
                 Item tmp;
 				tmp = list[i];
@@ -33,11 +33,11 @@ public class Sort {
 	private static void quickInsert (Item[] list, int left, int right) {
 		int i = left, j = right;
         Item tmp;
-        Long pivot = list[(i+j)/2].getCpfLong();
+        Long pivot = list[(i+j) >> 1].getCpf();
 
         while (i <= j) {
-            while (list[i].getCpfLong() < pivot) i++;
-            while (list[j].getCpfLong() > pivot) j--;
+            while (list[i].getCpf() < pivot) i++;
+            while (list[j].getCpf() > pivot) j--;
             if (i <= j) {
                 tmp = list[i];
                 list[i] = list[j];
@@ -63,7 +63,7 @@ public class Sort {
         for (i = left + 1; i <= right; i++) {
             tmp = list[i];
             j = i;
-            while (j > 0 && list[j - 1].getCpfLong() > tmp.getCpfLong()) {
+            while (j > 0 && list[j - 1].getCpf() > tmp.getCpf()) {
                 list[j] = list[j - 1];
                 j--;
             }

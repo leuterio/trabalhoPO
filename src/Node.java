@@ -3,11 +3,6 @@ public class Node {
     private Item info;
     private Node next;
 
-    //TODO: check if it is needed
-    public Node() {
-
-    }
-
     public Node(Item info) {
         this.info = info;
     }
