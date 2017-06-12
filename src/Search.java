@@ -12,8 +12,8 @@ public class Search {
         while (left <= right) {
             center = (left + right) / 2;
 
-            if (Long.parseLong(cpf) == items[center].getCpfLong()) {
-                foundCpf +=  items[center].getNome() + "\t"+ cpf + "\t" + items[center].getCity();
+            if (Long.parseLong(cpf) == items[center].getCpf()) {
+                foundCpf +=  items[center].getName() + "\t"+ cpf + "\t" + items[center].getCity();
 
                 /*//ANDA COM O VETOR PARA A ESQUERDA PARA VERIFICAR SE EXISTE OUTRO ELEMENTO COM O MESMO CPF
                 int i;
@@ -35,7 +35,7 @@ public class Search {
                 return foundCpf;
 */
             }
-            else if (Long.parseLong(cpf) < items[center].getCpfLong()) right = center - 1;
+            else if (Long.parseLong(cpf) < items[center].getCpf()) right = center - 1;
             else left = center + 1;
         }
         return (cpf + " - CPF INEXISTENTE");

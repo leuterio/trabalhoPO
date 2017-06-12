@@ -3,13 +3,13 @@ public class Hashing {
     private ChainedList[] chainedVector;
     private int m;
 
-    public void insertHashing(Item item){
-        int n = (int) (item.getCpfLong() % m);
-        chainedVector[n].insertEnd(item);
+    public void insertHashing(Item item) {
+        int n = (int) (item.getCpf() % m);
+        chainedVector[n].insertLast(item);
     }
 
     public Hashing(int length) {
-        int t = (int) (length*1.1);
+        int t = (int) (length * 1.1);
         this.m = closestPrime(t);
         this.chainedVector = new ChainedList[this.m];
         for (int i = 0; i < chainedVector.length; i++)
@@ -17,7 +17,7 @@ public class Hashing {
 
     }
 
-    public String[] search(String[] cpfs){
+    public String[] search(String[] cpfs) {
         String[] line = new String[cpfs.length];
         for (int i = 0; i < cpfs.length; i++) {
             line[i] = this.search(Long.parseLong(cpfs[i]));
@@ -30,8 +30,8 @@ public class Hashing {
         int n = (int) (cpf % this.m);
         ChainedList list = this.chainedVector[n];
         Node node = list.getFirst();
-        while(node != null){
-            if (node.getInfo().getCpfLong() == cpf) return node.toString();
+        while (node != null) {
+            if (node.getInfo().getCpf() == cpf) return node.toString();
             node = node.getNext();
         }
         return "not found";

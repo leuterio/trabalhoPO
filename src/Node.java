@@ -11,16 +11,18 @@ public class Node {
         return next;
     }
 
-    public void setNext(Node next) {
+    public Node setNext(Node next) {
         this.next = next;
+        return this;
     }
 
     public Item getInfo() {
         return info;
     }
 
-    public void setInfo(Item info) {
+    public Node setInfo(Item info) {
         this.info = info;
+        return this;
     }
 
     @Override

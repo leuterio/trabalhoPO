@@ -33,6 +33,7 @@ public class Main {
                     //read to vector
                     Reader.read(vector, filename);
                     //apply quicksort
+                    Sort.quicksort(vector);
                     //save to file
                     Reader.save(vector, "quicksort" + size + type + ".txt");
                 }
@@ -72,6 +73,7 @@ public class Main {
         //search
         String searches[] = {"shellsort", "quicksort", "heapsort", "quicksortDirectInsertion"};
         String searchFile = searches[(int) Math.random() * searches.length] + sizes[(int) Math.random() * sizes.length] + types[(int) Math.random() * types.length] + ".txt";
+        System.out.println(searchFile);
 
         //TODO: SEARCH FOR CITY AND SAVE ALL ITS CITIZENS OR RETURN "MUNICÍPIO INEXISTENTE" MESSAGE
     }

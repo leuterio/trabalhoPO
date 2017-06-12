@@ -1,3 +1,5 @@
+import sun.reflect.generics.tree.Tree;
+
 /**
  * Created by rdn on 03/06/17.
  */
@@ -16,32 +18,35 @@ public class TreeNode {
         return this.right;
     }
 
-    public void setRight(TreeNode right) {
+    public TreeNode setRight(TreeNode right) {
         this.right = right;
+        return this;
     }
 
     public TreeNode getLeft() {
         return this.left;
     }
 
-    public void setLeft(TreeNode left) {
+    public TreeNode setLeft(TreeNode left) {
         this.left = left;
+        return this;
     }
 
-    public Node getRepetido() {
+    /*public Node getRepetido() {
         return repetido;
-    }
+    }*/
 
-    public void setRep(Node rep) {
+    /*public void setRep(Node rep) {
         this.repetido = rep;
-    }
+    }*/
 
     public byte getBalanceFactor() {
         return this.balanceFactor;
     }
 
-    public void setBalanceFactor(byte balanceFactor) {
+    public TreeNode setBalanceFactor(byte balanceFactor) {
         this.balanceFactor = balanceFactor;
+        return this;
     }
 
     public Item getInfo() {
