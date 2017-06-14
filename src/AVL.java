@@ -4,7 +4,7 @@ public class AVL {
     private boolean h;
     private int length;
 
-    public ArvoreAVL() {
+    public AVL() {
         this.root = null;
         this.h = true;
         this.length = 0;
@@ -20,26 +20,13 @@ public class AVL {
             TreeNode newNode = new TreeNode(elem);
             this.h = true;
             return newNode;
-        } else if (elem.getCpfLong() < node.getInfo().getCpfLong()) {
+        } else if (elem.getCpf() < node.getInfo().getCpf()) {
             node.setLeft(this.insert(elem, node.getLeft()));
             node = this.balanceRight(node);
             return node;
-        } else if (elem.getCpfLong() > node.getInfo().getCpfLong()) {
+        } else {
             node.setRight(this.insert(elem, node.getRight()));
             node = this.balanceLeft(node);
-            return node;
-        }
-        // TODO: Inserir CPF repetido (remove??)
-        else {
-            if (node.getRepetido() == null)
-                node.setRep(new No(elem));
-            else {
-                Node repetido = node.getRepetido();
-                while (repetido.getProx() != null)
-                    repetido = repetido.getProx();
-                repetido.setProx(new No(elem));
-            }
-            this.h = false;
             return node;
         }
     }
@@ -135,16 +122,6 @@ public class AVL {
         sortedVector(node.getLeft(), vector, i);
         vector[i] = node.getInfo();
         i++;
-
-        //TODO: repetidos... (remover?)
-        /*if (node.getRepetido() != null) {
-            No reptidos = node.getRepetido();
-            while (reptidos != null) {
-                vector[i] = reptidos.getInfo();
-                i++;
-                reptidos = reptidos.getProx();
-            }
-        }*/
         sortedVector(node.getRight(), vector, i);
     }
 
@@ -159,24 +136,10 @@ public class AVL {
 
     private String search(long cpf, TreeNode node) {
         String str = "";
-//        double total = 0;
         if (node != null) {
-            if (cpf < node.getInfo().getCpfLong()) str = this.search(cpf, node.getLeft());
-            else if (cpf > node.getInfo().getCpfLong()) str = this.search(cpf, node.getRight());
+            if (cpf < node.getInfo().getCpf()) str = this.search(cpf, node.getLeft());
+            else if (cpf > node.getInfo().getCpf()) str = this.search(cpf, node.getRight());
             else str = node.toString();
-            /*else {
-                str = node.toString();
-                total = node.getInfo().getValor();
-                if (node.getRepetido() != null) {
-                    No repetidos = node.getRepetido();
-                    while (repetidos != null) {
-                        str += repetidos.getCompra();
-                        total += repetidos.getInfo().getValor();
-                        repetidos = repetidos.getProx();
-                    }
-                }
-                str += "TOTAL: " + total;
-            }*/
         }
         return str;
     }

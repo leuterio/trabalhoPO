@@ -24,9 +24,9 @@ public class ABB {
         String str = "";
 //        double total = 0;
         if (node != null) {
-            if (cpf < node.getInfo().getCpfLong())
+            if (cpf < node.getInfo().getCpf())
                 str = this.search(cpf, node.getLeft());
-            else if (cpf > node.getInfo().getCpfLong())
+            else if (cpf > node.getInfo().getCpf())
                 str = this.search(cpf, node.getRight());
             else str = node.toString();
             /*else {
@@ -54,29 +54,17 @@ public class ABB {
     private TreeNode insert(Item elem, TreeNode node) {
         if (node == null) {
             return (new TreeNode(elem));
-        } else if (elem.getCpfLong() < node.getInfo().getCpfLong()) {
+        } else if (elem.getCpf() < node.getInfo().getCpf()) {
             node.setLeft(this.insert(elem, node.getLeft()));
             return node;
-        } else if (elem.getCpfLong() > node.getInfo().getCpfLong()) {
-            node.setRight(this.insert(elem, node.getRight()));
-            return node;
         } else {
-            if (node.getRepetido() == null) {
-                node.setRep(new No(elem));
-            } else {
-                Node repetido = node.getRepetido();
-                while (repetido.getProx() != null)
-                    repetido = repetido.getProx();
-                repetido.setProx(new No(elem));
-            }
+            node.setRight(this.insert(elem, node.getRight()));
             return node;
         }
     }
 
     public Item[] centralWalkthrough() {
         Item[] sortedVector = new Item[this.length];
-//        int[] i = new int[1];
-//        i[0] = 0;
         int i = 0;
         return (this.centralWalkthroughExec(this.root, sortedVector, i));
     }
@@ -86,14 +74,6 @@ public class ABB {
             sortedVector = this.centralWalkthroughExec(tree.getLeft(), sortedVector, i);
             sortedVector[i] = tree.getInfo();
             i++;
-            if (tree.getRepetido() != null) {
-                Node reptidos = tree.getRepetido();
-                while (reptidos != null) {
-                    sortedVector[i] = reptidos.getInfo();
-                    i++;
-                    reptidos = reptidos.getNext();
-                }
-            }
             sortedVector = centralWalkthroughExec(tree.getRight(), sortedVector, i);
         }
         return sortedVector;

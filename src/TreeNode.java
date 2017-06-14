@@ -1,12 +1,9 @@
-import sun.reflect.generics.tree.Tree;
-
 /**
  * Created by rdn on 03/06/17.
  */
 public class TreeNode {
     private Item info;
     private TreeNode left, right;
-    private Node repetido;
     private byte balanceFactor;
 
     public TreeNode(Item info) {
@@ -31,14 +28,6 @@ public class TreeNode {
         this.left = left;
         return this;
     }
-
-    /*public Node getRepetido() {
-        return repetido;
-    }*/
-
-    /*public void setRep(Node rep) {
-        this.repetido = rep;
-    }*/
 
     public byte getBalanceFactor() {
         return this.balanceFactor;

@@ -8,8 +8,8 @@ import java.io.IOException;
 
 public class Reader {
 	
-	private static final String INPUT = "./src/files/";
-	private static final String OUTPUT = "./src/output/";
+	private static final String INPUT = "./src/files/input/";
+	private static final String OUTPUT = "./src/files/output/";
 	
 	public static void read(Item[] dataVector, String file) {
 		try {
@@ -54,7 +54,7 @@ public class Reader {
 			
 			while ((line = in.readLine()) != null) {
 				values = line.split(";");
-				tree.insertRoot(new Item(values[0], values[1], values[2]));
+				tree.createRoot(new Item(values[0], values[1], values[2]));
 			}
 			
 			in.close();
@@ -72,7 +72,7 @@ public class Reader {
 			
 			while ((line = in.readLine()) != null) {
 				values = line.split(";");
-				hash.insertHash(new Item(values[0], values[1], values[2]));
+				hash.insertHashing(new Item(values[0], values[1], values[2]));
 			}
 			
 			in.close();
