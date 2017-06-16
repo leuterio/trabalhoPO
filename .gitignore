@@ -24,4 +24,4 @@
 hs_err_pid*
 
 .idea/
-src/files/output
+src/files/output/*

@@ -120,8 +120,7 @@ public class AVL {
         if (node == null) return;
 
         sortedVector(node.getLeft(), vector, i);
-        vector[i] = node.getInfo();
-        i++;
+        vector[i++] = node.getInfo();
         sortedVector(node.getRight(), vector, i);
     }
 
@@ -132,6 +131,7 @@ public class AVL {
             if (lines[i].isEmpty()) lines[i] = cpfs[i] + " - CPF INEXISTENTE";
         }
         return lines;
+
     }
 
     private String search(long cpf, TreeNode node) {

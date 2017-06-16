@@ -4,87 +4,67 @@ public class Main {
     public static void main(String[] args) {
         long time;
         int loops = 5;
-        ABB abb;
-        AVL avl;
-        Hashing hash;
+//        ABB abb;
+//        AVL avl;
+//        Hashing hash;
         Item vector[];
         String sizes[] = {"500", "1000", "5000", "10000", "50000"}, types[] = {"alea", "inv", "ord"};
         System.out.println("SIZE\tTYPE\tAVERAGE TIME\t\t\tSORT METHOD");
         for (String size : sizes) {
             for (String type : types) {
-                String filename = "registros" + size + type + ".txt";
+                String filename = "registros" + size + type;
 
                 //shellsort
-                vector = new Item[Integer.parseInt(size)];
                 time = System.currentTimeMillis();
-                for (int i = 0; i < loops; i++) {
-                    //read to vector
-                    Reader.read(vector, filename);
-                    //apply shellsort
-                    Sort.shellsort(vector);
-                    //save to file
-                    Reader.save(vector, "shellsort" + size + type + ".txt");
-                }
-                String x = "hello";
+                for (int i = 0; i < loops; i++) Reader.save(Sort.shellsort(Reader.read(filename)), "shellsort" + size + type);
                 time = (System.currentTimeMillis() - time) / loops;
-                //save this time
-                System.out.println(size+"\t"+(size.length()==3?"\t":"")+type+"\t"+(type.length()==3?"\t":"")+time+"ms\t\t\t\t"+(time<10?"\t":"")+"shellsort");
+                System.out.println(size + "\t" + (size.length() == 3 ? "\t" : "") + type + "\t" + (type.length() == 3 ? "\t" : "") + time + "ms\t\t\t\t" + (time < 10 ? "\t" : "") + "shellsort");
 
                 //quicksort
-                vector = new Item[Integer.parseInt(size)];
                 time = System.currentTimeMillis();
-                for (int i = 0; i < loops; i++) {
-                    //read to vector
-                    Reader.read(vector, filename);
-                    //apply quicksort
-                    Sort.quicksort(vector);
-                    //save to file
-                    Reader.save(vector, "quicksort" + size + type + ".txt");
-                }
+                for (int i = 0; i < loops; i++) Reader.save(Sort.quicksort(Reader.read(filename)), "quicksort" + size + type);
                 time = (System.currentTimeMillis() - time) / loops;
-                //save this time
-                System.out.println(size+"\t"+(size.length()==3?"\t":"")+type+"\t"+(type.length()==3?"\t":"")+time+"ms\t\t\t\t"+(time<10?"\t":"")+"quicksort");
+                System.out.println(size + "\t" + (size.length() == 3 ? "\t" : "") + type + "\t" + (type.length() == 3 ? "\t" : "") + time + "ms\t\t\t\t" + (time < 10 ? "\t" : "") + "quicksort");
 
                 //heapsort
-                vector = new Item[Integer.parseInt(size)];
                 time = System.currentTimeMillis();
-                for (int i = 0; i < loops; i++) {
-                    //read to vector
-                    Reader.read(vector, filename);
-                    //apply heapsort
-                    Sort.heapsort(vector);
-                    //save to file
-                    Reader.save(vector, "heapsort" + size + type + ".txt");
-                }
+                for (int i = 0; i < loops; i++) Reader.save(Sort.heapsort(Reader.read(filename)), "heapsort" + size + type);
                 time = (System.currentTimeMillis() - time) / loops;
-                //save this time
-                System.out.println(size+"\t"+(size.length()==3?"\t":"")+type+"\t"+(type.length()==3?"\t":"")+time+"ms\t\t\t\t"+(time<10?"\t":"")+"heapsort");
+                System.out.println(size + "\t" + (size.length() == 3 ? "\t" : "") + type + "\t" + (type.length() == 3 ? "\t" : "") + time + "ms\t\t\t\t" + (time < 10 ? "\t" : "") + "heapsort");
 
                 //quicksort w/ direct insertion
-                vector = new Item[Integer.parseInt(size)];
                 time = System.currentTimeMillis();
-                for (int i = 0; i < loops; i++) {
-                    //read to vector
-                    Reader.read(vector, filename);
-                    //apply quicksortInsertionSort
-                    Sort.quicksortInsertionSort(vector);
-                    //save to file
-                    Reader.save(vector, "quicksortInsertionSort" + size + type + ".txt");
-                }
+                for (int i = 0; i < loops; i++) Reader.save(Sort.quicksortInsertionSort(Reader.read(filename)), "quicksortInsertionSort" + size + type);
                 time = (System.currentTimeMillis() - time) / loops;
-                //save this time
-                System.out.println(size+"\t"+(size.length()==3?"\t":"")+type+"\t"+(type.length()==3?"\t":"")+time+"ms\t\t\t\t"+(time<10?"\t":"")+"quicksort with insertion sort");
+                System.out.println(size + "\t" + (size.length() == 3 ? "\t" : "") + type + "\t" + (type.length() == 3 ? "\t" : "") + time + "ms\t\t\t\t" + (time < 10 ? "\t" : "") + "quicksort with insertion sort");
             }
         }
-        System.out.println("\n\nSORTING DONE");
+        System.out.println("\n\nSORTING DONE\n\n\n\n");
 
 
         //search
-        String searches[] = {"shellsort", "quicksort", "heapsort", "quicksortInsertionSort"};
-        String searchFile = searches[(int) Math.random() * searches.length] + sizes[(int) Math.random() * sizes.length] + types[(int) Math.random() * types.length] + ".txt";
-        System.out.println(searchFile);
+        String[] searches = {"shellsort", "quicksort", "heapsort", "quicksortInsertionSort"}, cityList;
+        String randSize = sizes[(int) (Math.random() * sizes.length)];
+        String searchFile = searches[(int) (Math.random() * searches.length)] + randSize + types[(int) (Math.random() * types.length)];
+        System.out.println("Searching on file: " + searchFile);
+        cityList = Reader.getCityList();
+        time = System.currentTimeMillis();
+        for (int i = 0; i < loops; i++) Reader.save(Search.binSearch(Reader.readOutput(searchFile), cityList), "binarySearch");
+        System.out.println("binSearch = " + (System.currentTimeMillis() - time) / loops + "ms");
 
-        //TODO: SEARCH FOR CITY AND SAVE ALL ITS CITIZENS OR RETURN "MUNICÍPIO INEXISTENTE" MESSAGE
-        System.out.println("TODO THE FREAKING REST");
+        //ABB
+        time = System.currentTimeMillis();
+        for (int i = 0; i < loops; i++) Reader.save(Reader.read(new ABB(), searchFile).search(cityList), "ABB");
+        System.out.println("ABB = " + (System.currentTimeMillis() - time) / loops + "ms");
+
+        //AVL
+        /*time = System.currentTimeMillis();
+        for (int i = 0; i < loops; i++) Reader.save(Reader.read(new AVL(), searchFile).search(cityList), "AVL");
+        System.out.println("AVL = " + (System.currentTimeMillis() - time) / loops + "ms");
+
+        //Hashing
+        time = System.currentTimeMillis();
+        for (int i = 0; i < loops; i++) Reader.save(Reader.read(new Hashing(Integer.parseInt(randSize)), searchFile).search(cityList), "Hashing");
+        System.out.println("Hashing = " + (System.currentTimeMillis() - time) / loops + "ms");*/
     }
 }
