@@ -2,8 +2,15 @@ public class Hashing {
     private ChainedList[] chainedVector;
     private int m;
 
+    //summing charCodes to generate a number for the hashing function
+    private int hashNumber(String city){
+        int sum = 0;
+        for(int i=0; i<city.length(); i++) sum += (int) city.charAt(i);
+        return sum;
+    }
+
     public void insertHashing(Item item) {
-        int n = (int) (item.getCpf() % m);
+        int n = hashNumber(item.getCity()) % this.m;
         chainedVector[n].insertLast(item);
     }
 
@@ -11,29 +18,28 @@ public class Hashing {
         int t = (int) (length * 1.1);
         this.m = closestPrime(t);
         this.chainedVector = new ChainedList[this.m];
-        for (int i = 0; i < chainedVector.length; i++)
-            chainedVector[i] = new ChainedList();
-
+        for (int i = 0; i < chainedVector.length; i++) chainedVector[i] = new ChainedList();
     }
 
-    public String[] search(String[] cpfs) {
-        String[] line = new String[cpfs.length];
-        for (int i = 0; i < cpfs.length; i++) {
-            line[i] = this.search(Long.parseLong(cpfs[i]));
-            if (line[i].isEmpty()) line[i] = cpfs[i] + " - CPF INEXISTENTE";
+    public String[] search(String[] cities) {
+        String[] line = new String[cities.length];
+        for (int i = 0; i < cities.length; i++) {
+            line[i] = this.search(cities[i]);
+            if (line[i].isEmpty()) line[i] = "MUNICÍPIO INEXISTENTE";
         }
         return line;
     }
 
-    private String search(long cpf) {
-        int n = (int) (cpf % this.m);
+    private String search(String city) {
+        int n = hashNumber(city) % this.m;
         ChainedList list = this.chainedVector[n];
         Node node = list.getFirst();
+        String str = "";
         while (node != null) {
-            if (node.getInfo().getCpf() == cpf) return node.toString();
+            if (city.equals(node.getInfo().getCity())) str += (!str.isEmpty() ? "\n" : "") + node.getInfo().getName();
             node = node.getNext();
         }
-        return "not found";
+        return str;
     }
 
     private int closestPrime(int number) {
@@ -52,8 +58,7 @@ public class Hashing {
     private boolean isPrime(int number) {
         if (number == 2 || number == 3 || number == 5) return true;
         else if ((number < 2) || (number % 2 == 0) || (number % 3 == 0) || (number % 5 == 0)) return false;
-        int root = (int) Math.ceil(Math.sqrt(number));
-        int n, i = 3;
+        int root = (int) Math.ceil(Math.sqrt(number)), n, i = 3;
 
         do {
             n = number % i;

@@ -11,7 +11,6 @@ public class Reader {
     private static final String INPUT = "./src/files/input/";
     private static final String OUTPUT = "./src/files/output/";
 
-    //	public static void read(Item[] dataVector, String file) {
     public static Item[] read(String file) {
         try {
             BufferedReader in = new BufferedReader(new FileReader(new File(INPUT + file + ".txt")));
@@ -74,7 +73,7 @@ public class Reader {
 
             while ((line = in.readLine()) != null) {
                 values = line.split(";");
-                tree.createRoot(new Item(values[0], values[1], values[2]));
+                tree.insert(new Item(values[0], values[1], values[2]));
             }
             in.close();
             return tree;
@@ -140,7 +139,6 @@ public class Reader {
             for (int i = 0; i < data.length; i++) {
                 out.write(data[i]);
                 out.newLine();
-//                out.newLine();
             }
             out.close();
 

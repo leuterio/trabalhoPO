@@ -8,6 +8,10 @@ public class ABB {
         this.length = 0;
     }
 
+    private Boolean leftCondition(Item a, Item b) {
+        return a.getCity().compareTo(b.getCity()) < 0 || a.getCity().equals(b.getCity()) && a.getName().compareTo(b.getName()) < 0;
+    }
+
     public String[] search(String[] cities) {
         String[] line = new String[cities.length];
         for (int i = 0; i < cities.length; i++) {
@@ -22,7 +26,13 @@ public class ABB {
         if (node != null) {
             if (city.compareTo(node.getInfo().getCity()) < 0) str = this.search(city, node.getLeft());
             else if (city.compareTo(node.getInfo().getCity()) > 0) str = this.search(city, node.getRight());
-            else str = node.getInfo().getName();
+            else {
+                str += node.getInfo().getName();
+                String left = search(city, node.getLeft());
+                if (!left.isEmpty()) str += "\n" + left;
+                String right = search(city, node.getRight());
+                if (!right.isEmpty()) str += "\n" + right;
+            }
         }
         return str;
     }
@@ -33,21 +43,14 @@ public class ABB {
     }
 
     private TreeNode insert(Item elem, TreeNode node) {
-        if (node == null) {
-            return (new TreeNode(elem));
-        } else if (elem.getCity().compareTo(node.getInfo().getCity()) < 0 || elem.getCity().equals(node.getInfo().getCity()) && elem.getName().compareTo(node.getInfo().getName()) < 0) {
-            return node.setLeft(this.insert(elem, node.getLeft()));
-//            return node;
-        } else {
-            return node.setRight(this.insert(elem, node.getRight()));
-//            return node;
-        }
+        if (node == null) return new TreeNode(elem);
+        else if (leftCondition(elem, node.getInfo())) return node.setLeft(this.insert(elem, node.getLeft()));
+        return node.setRight(this.insert(elem, node.getRight()));
     }
 
     public Item[] centralWalkthrough() {
         Item[] sortedVector = new Item[this.length];
-        int i = 0;
-        return (this.centralWalkthroughAux(this.root, sortedVector, i));
+        return (this.centralWalkthroughAux(this.root, sortedVector, 0));
     }
 
     private Item[] centralWalkthroughAux(TreeNode tree, Item[] sortedVector, int i) {
@@ -59,7 +62,7 @@ public class ABB {
         return sortedVector;
     }
 
-    public ABB balancedTree() {
+    public ABB balance() {
         ABB temp = new ABB();
         Item[] sortedVector = centralWalkthrough();
         this.balance(sortedVector, temp, 0, this.length - 1);

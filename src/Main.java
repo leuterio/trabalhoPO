@@ -4,7 +4,7 @@ public class Main {
     public static void main(String[] args) {
         long time;
         int loops = 5;
-//        ABB abb;
+        ABB abb;
 //        AVL avl;
 //        Hashing hash;
         Item vector[];
@@ -54,17 +54,17 @@ public class Main {
 
         //ABB
         time = System.currentTimeMillis();
-        for (int i = 0; i < loops; i++) Reader.save(Reader.read(new ABB(), searchFile).search(cityList), "ABB");
+        for (int i = 0; i < loops; i++) Reader.save(Reader.read(new ABB(), searchFile).balance().search(cityList), "ABB");
         System.out.println("ABB = " + (System.currentTimeMillis() - time) / loops + "ms");
 
         //AVL
-        /*time = System.currentTimeMillis();
+        time = System.currentTimeMillis();
         for (int i = 0; i < loops; i++) Reader.save(Reader.read(new AVL(), searchFile).search(cityList), "AVL");
         System.out.println("AVL = " + (System.currentTimeMillis() - time) / loops + "ms");
 
         //Hashing
         time = System.currentTimeMillis();
         for (int i = 0; i < loops; i++) Reader.save(Reader.read(new Hashing(Integer.parseInt(randSize)), searchFile).search(cityList), "Hashing");
-        System.out.println("Hashing = " + (System.currentTimeMillis() - time) / loops + "ms");*/
+        System.out.println("Hashing = " + (System.currentTimeMillis() - time) / loops + "ms");
     }
 }

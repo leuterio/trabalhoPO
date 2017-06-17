@@ -1,4 +1,3 @@
-
 public class AVL {
     private TreeNode root;
     private boolean h;
@@ -10,9 +9,14 @@ public class AVL {
         this.length = 0;
     }
 
-    public void createRoot(Item elem) {
+    private Boolean leftCondition(Item a, Item b) {
+        return a.getCity().compareTo(b.getCity()) < 0 || a.getCity().equals(b.getCity()) && a.getName().compareTo(b.getName()) < 0;
+    }
+
+    public AVL insert(Item elem) {
         this.root = this.insert(elem, this.root);
         this.length++;
+        return this;
     }
 
     private TreeNode insert(Item elem, TreeNode node) {
@@ -20,7 +24,7 @@ public class AVL {
             TreeNode newNode = new TreeNode(elem);
             this.h = true;
             return newNode;
-        } else if (elem.getCpf() < node.getInfo().getCpf()) {
+        } else if (leftCondition(elem, node.getInfo())) {
             node.setLeft(this.insert(elem, node.getLeft()));
             node = this.balanceRight(node);
             return node;
@@ -46,9 +50,9 @@ public class AVL {
     private TreeNode balanceLeft(TreeNode node) {
         if (this.h) {
             byte factor = node.getBalanceFactor();
-            if(factor == 1) node = this.rotateLeft(node);
-            else if(factor == 0) node.setBalanceFactor((byte) 1);
-            else if(factor == 1){
+            if (factor == 1) node = this.rotateLeft(node);
+            else if (factor == 0) node.setBalanceFactor((byte) 1);
+            else if (factor == 1) {
                 node.setBalanceFactor((byte) 0);
                 this.h = false;
             }
@@ -107,39 +111,28 @@ public class AVL {
         return node;
     }
 
-    //TODO: meio redundante, já que faz o caminhamento central também, identicamente a função "centralWalkthrough"
-    public Item[] sortedVector() {
-        Item[] vector = new Item[this.length];
-        int i = 0;
-        sortedVector(this.root, vector, i);
-
-        return vector;
-    }
-
-    private void sortedVector(TreeNode node, Item[] vector, int i) {
-        if (node == null) return;
-
-        sortedVector(node.getLeft(), vector, i);
-        vector[i++] = node.getInfo();
-        sortedVector(node.getRight(), vector, i);
-    }
-
-    public String[] search(String[] cpfs) {
-        String[] lines = new String[cpfs.length];
-        for (int i = 0; i < cpfs.length; i++) {
-            lines[i] = this.search(Long.parseLong(cpfs[i]), this.root);
-            if (lines[i].isEmpty()) lines[i] = cpfs[i] + " - CPF INEXISTENTE";
+    public String[] search(String[] cities) {
+        String[] lines = new String[cities.length];
+        for (int i = 0; i < cities.length; i++) {
+            lines[i] = this.search(cities[i], this.root);
+            if (lines[i].isEmpty()) lines[i] = "MUNICÍPIO INEXISTENTE";
         }
         return lines;
 
     }
 
-    private String search(long cpf, TreeNode node) {
+    private String search(String city, TreeNode node) {
         String str = "";
         if (node != null) {
-            if (cpf < node.getInfo().getCpf()) str = this.search(cpf, node.getLeft());
-            else if (cpf > node.getInfo().getCpf()) str = this.search(cpf, node.getRight());
-            else str = node.toString();
+            if (city.compareTo(node.getInfo().getCity()) < 0) str = this.search(city, node.getLeft());
+            else if (city.compareTo(node.getInfo().getCity()) > 0) str = this.search(city, node.getRight());
+            else {
+                str += node.getInfo().getName();
+                String left = search(city, node.getLeft());
+                if (!left.isEmpty()) str += "\n" + left;
+                String right = search(city, node.getRight());
+                if (!right.isEmpty()) str += "\n" + right;
+            }
         }
         return str;
     }

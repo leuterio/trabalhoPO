@@ -11,10 +11,6 @@ public class ChainedList {
         last = null;
     }
 
-    public ChainedList(Item elem) {
-        this.insertLast(elem);
-    }
-
     public Node getFirst() {
         return first;
     }
@@ -33,13 +29,13 @@ public class ChainedList {
         return this;
     }
 
-    public boolean empty() {
+    public boolean isEmpty() {
         return this.first==null && true || false;
     }
 
     public ChainedList insertLast(Item elem) {
         Node node = new Node(elem);
-        if (this.empty()) this.first = node;
+        if (this.isEmpty()) this.first = node;
         else this.last.setNext(node);
         this.last = node;
         return this;
