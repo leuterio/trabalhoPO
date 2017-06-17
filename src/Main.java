@@ -4,9 +4,6 @@ public class Main {
     public static void main(String[] args) {
         long time;
         int loops = 5;
-        ABB abb;
-//        AVL avl;
-//        Hashing hash;
         Item vector[];
         String sizes[] = {"500", "1000", "5000", "10000", "50000"}, types[] = {"alea", "inv", "ord"};
         System.out.println("SIZE\tTYPE\tAVERAGE TIME\t\t\tSORT METHOD");
@@ -43,8 +40,9 @@ public class Main {
 
 
         //search
-        String[] searches = {"shellsort", "quicksort", "heapsort", "quicksortInsertionSort"}, cityList;
-        String randSize = sizes[(int) (Math.random() * sizes.length)];
+        //searching only files with 500, 1000 and 5000 registers due to stack overflow issues caused by recursion in ABB search method
+        String[] searches = {"shellsort", "quicksort", "heapsort", "quicksortInsertionSort"}, cityList, searchSizes = {"500", "1000", "5000"};
+        String randSize = searchSizes[(int) (Math.random() * searchSizes.length)];
         String searchFile = searches[(int) (Math.random() * searches.length)] + randSize + types[(int) (Math.random() * types.length)];
         System.out.println("Searching on file: " + searchFile);
         cityList = Reader.getCityList();

@@ -16,11 +16,11 @@ public class Search {
 
                 //check if left neighbors that have same city
                 int i = center - 1;
-                while (i >= 0 && city.compareTo(vector[i].getCity()) == 0) citizens += "\n"+vector[i--].getName();
+                while (i >= 0 && city.compareTo(vector[i].getCity()) == 0) citizens += "\r\n"+vector[i--].getName();
 
                 //check if right neighbors that have same city
                 i = center + 1;
-                while (i < vector.length && city.compareTo(vector[i].getCity()) == 0) citizens += "\n"+vector[i++].getName();
+                while (i < vector.length && city.compareTo(vector[i].getCity()) == 0) citizens += "\r\n"+vector[i++].getName();
                 return citizens;
             } else if (city.compareTo(vector[center].getCity()) < 0) right = center - 1;
             else left = center + 1;

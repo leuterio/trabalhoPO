@@ -8,7 +8,7 @@ public class ABB {
         this.length = 0;
     }
 
-    private Boolean leftCondition(Item a, Item b) {
+    private boolean leftCondition(Item a, Item b) {
         return a.getCity().compareTo(b.getCity()) < 0 || a.getCity().equals(b.getCity()) && a.getName().compareTo(b.getName()) < 0;
     }
 
