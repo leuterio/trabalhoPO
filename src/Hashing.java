@@ -57,7 +57,7 @@ public class Hashing {
 
     private boolean isPrime(int number) {
         if (number == 2 || number == 3 || number == 5) return true;
-        else if ((number < 2) || (number % 2 == 0) || (number % 3 == 0) || (number % 5 == 0)) return false;
+        else if (number < 2 || number % 2 == 0 || number % 3 == 0 || number % 5 == 0) return false;
         int root = (int) Math.ceil(Math.sqrt(number)), n, i = 3;
 
         do {
