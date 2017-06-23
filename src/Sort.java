@@ -15,7 +15,7 @@ public class Sort {
 
     private static void quicksortAux(Item[] list, int left, int right) {
         int i = left, j = right;
-        Item pivot = list[(i + j) >> 1];
+        Item pivot = list[(i + j) / 2];
 
         while (i <= j) {
             while (leftCondition(list[i], pivot)) i++;
@@ -58,7 +58,7 @@ public class Sort {
 
     public static Item[] heapsort(Item[] list) {
         int right = list.length - 1;
-        int left = (right - 1) >> 1;
+        int left = (right - 1) / 2;
         Item temp;
         while (left >= 0) heapsortAux(list, left--, list.length - 1);
         while (right > 0) {
@@ -96,7 +96,7 @@ public class Sort {
 
     private static void quicksortInsertionSortAux(Item[] list, int left, int right) {
         int i = left, j = right;
-        Item pivot = list[(i + j) >> 1];
+        Item pivot = list[(i + j) / 2];
 
         while (i <= j) {
             while (leftCondition(list[i], pivot)) i++;
@@ -120,8 +120,9 @@ public class Sort {
     private static void insertionSort(Item[] list, int left, int right) {
         int i, j;
         Item temp;
-        for (i = left + 1; i < right - left + 1; i++) {
-            temp = list[j = i - 1];
+        for (i = left + 1; i <= right; i++) {
+            temp = list[j = i];
+            j--;
             while (j >= 0 && rightCondition(list[j], temp)) list[j + 1] = list[j--];
             list[j + 1] = temp;
         }

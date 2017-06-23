@@ -1,6 +1,4 @@
-/**
- * Created by rdn on 03/06/17.
- */
+
 public class TreeNode {
     private Item info;
     private TreeNode left, right;
@@ -20,12 +18,22 @@ public class TreeNode {
         return this;
     }
 
+    public TreeNode setRight(){
+        this.right = null;
+        return this;
+    }
+
     public TreeNode getLeft() {
         return this.left;
     }
 
     public TreeNode setLeft(TreeNode left) {
         this.left = left;
+        return this;
+    }
+
+    public TreeNode setLeft(){
+        this.left = null;
         return this;
     }
 

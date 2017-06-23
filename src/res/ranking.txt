@@ -1,0 +1,10 @@
+baz;130
+bar;120
+bar;120
+qux;110
+foo;90
+hello;60
+hello;60
+hello;60
+hello;60
+hello;60
